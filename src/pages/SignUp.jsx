@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 
 const SignUp = () => {
     const [loading, setLoading] = useState(false);
@@ -55,13 +56,17 @@ const SignUp = () => {
                 </div>
                 <div className="field">
                     <div >password* </div><input type="password" id="password" value={formData.password} onChange={OnSetFormData}  className='hide' placeholder='Enter Password ...' required />
-                    <div className={`${!active ? 'solve': formData.password.length === 0 ? 'error': 'solve' } `}>Enter Password* is required.</div>
+                    <div className={`${!active ? 'solve': formData.password.length === 0 ? 'error': 'solve' } `}>Password* is required.</div>
                 </div>
                 <div className="field">
                     <div >Confirm Password* </div><input type="password" id="confirmPassword" value={formData.confirmPassword} onChange={OnSetFormData}  placeholder='Enter Password ...' required />
-                    <div className={`${!active ? 'solve': formData.confirmPassword.length === 0 ? 'error': 'solve' } `}>Confirm Password* is required.</div>
+                    <div className={`${!active ? 'solve': formData.confirmPassword.length === 0 ? 'error': 'solve' } `}>Please Confirm Your Password*.</div>
                 </div>
-                <button type="submit" className={`register ${loading ? 'load':''}`} onClick={onSubmitData}>{ loading ? "Loading ..." : "Sign Up"}</button>
+                <button type="submit" className={`register sign ${loading ? 'load':''}`} onClick={onSubmitData}>{ loading ? "Loading ..." : "Sign Up"}</button>
+                <div className="options">
+                    <div className="up">Already have an account! <Link to="/signin"><span>Sign In</span> </Link></div>
+                    <div className="forget">Forget Password</div>
+                </div>
             </form>
         </div>
     </>
