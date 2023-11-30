@@ -1,0 +1,41 @@
+import { useRef, useState } from 'react'
+import './App.css'
+import { BrowserRouter as Router , Routes, Route } from 'react-router-dom'
+import Header from './components/Header'
+import Home from './components/Home'
+import SignUp from './pages/SignUp'
+import SignIn from './pages/SignIn'
+// // import { io } from 'socket.io-client';
+// // import socketIO from 'socket.io-client';
+
+// const socket = socketIO('http://localhost:3000/',{
+//   transports:['websocket']
+// });
+// const [count, setCount] = useState(0)
+// // socket.on('connect',(arg)=>{
+// //   console.log('socket connect from clientside',arg)
+// // })
+// socket.emit('hello',{
+//   message: 'world'
+// });
+// socket.on('world',(msg)=>{
+//   console.log('from server',msg)
+// })
+// // const socket = io('http://localhost:3000/');
+// // const socket = io();
+function App() {
+  return (
+    <>
+      <Router>
+        {/* <Header /> */}
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signin" element={<SignIn />} />
+        </Routes>
+      </Router>
+    </>
+  )
+}
+
+export default App
