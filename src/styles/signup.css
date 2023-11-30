@@ -59,6 +59,7 @@ form .field{
 .register{
     outline:none;
     border:none;
+    /* max-width: 250px; */
     max-width: 210px;
     margin-left: 20px;
     width:100px;

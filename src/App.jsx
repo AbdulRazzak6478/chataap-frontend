@@ -26,6 +26,7 @@ import SignIn from './pages/SignIn'
 function App() {
   return (
     <>
+    <div className="app">
       <Router>
         {/* <Header /> */}
         <Routes>
@@ -34,6 +35,7 @@ function App() {
             <Route path="/signin" element={<SignIn />} />
         </Routes>
       </Router>
+    </div>
     </>
   )
 }
