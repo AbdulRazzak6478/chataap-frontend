@@ -27,13 +27,24 @@ const SignUp = () => {
         setActive(true);
         console.log('onsubmit data click');
         console.log('form data : ',formData);
+        const userDataPayload = {
+            name : formData.userName,
+            email : formData.email,
+            password : formData.password,
+        }
         const customConfig = {
             headers: {
               "Content-Type": "application/json",
             },
           };
-        const user = await axios.post("http://localhost:3005/register",formData,customConfig);
-        console.log('user  : ',user.data.data)
+        const user = await axios.post("http://localhost:3005/register",userDataPayload,customConfig);
+        console.log('user  : ',user.data.data);
+        if(user.data.data.exist)
+        {
+            toast.error(`${user.data.data.message} , Please Login`);
+            setLoading(false);
+            return ;
+        }
         setFormData({
             userName:'',
             email:'',
@@ -42,6 +53,7 @@ const SignUp = () => {
         });
         console.log('successfully register')
         toast.success("Sign Up Successfully !");
+        setActive(false);
         setLoading(false);
     }
   return (

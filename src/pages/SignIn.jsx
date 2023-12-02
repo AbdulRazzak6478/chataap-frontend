@@ -1,4 +1,6 @@
+import axios from 'axios';
 import React, { useState } from 'react'
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 
 const SignUp = () => {
@@ -18,24 +20,32 @@ const SignUp = () => {
         console.log('form data : ',formData)
     }
     async function onSubmitData(event){
-        setLoading(true)
         event.preventDefault()
+        setLoading(true)
         setActive(true);
         console.log('onsubmit data click');
-        console.log('form data : ',formData)
-        setTimeout(() => {
-            console.log('signup done1')
-        }, 3000);
-        setTimeout((function(){
-                console.log('sign up done2 !');
-            })(), 2000)
-        console.log('sign up done3 !');
-        // setFormData({
-        //     email:'',
-        //     password:'',
-        // });
+        console.log('form data : ',formData);
+        const customConfig = {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          };
+        const user = await axios.post("http://localhost:3005/signin",formData,customConfig);
+        console.log('user  : ',user.data.data);
+        // if(user.data.data.exist)
+        // {
+        //     toast.error(`${user.data.data.message} , Please Login`);
+        //     setLoading(false);
+        //     return ;
+        // }
+        setFormData({
+            email:'',
+            password:'',
+        });
         console.log('successfully register')
-        setLoading(false)
+        toast.success("SignIn Successfully !");
+        setActive(false);
+        setLoading(false);
     }
   return (
     <>
