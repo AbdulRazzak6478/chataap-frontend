@@ -27,7 +27,19 @@ const SignUp = () => {
         setActive(true);
         console.log('onsubmit data click');
         console.log('form data : ',formData);
-       
+        const customConfig = {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          };
+        const user = await axios.post("http://localhost:3005/register",formData,customConfig);
+        console.log('user  : ',user.data.data)
+        setFormData({
+            userName:'',
+            email:'',
+            password:'',
+            confirmPassword : ''
+        });
         console.log('successfully register')
         toast.success("Sign Up Successfully !");
         setLoading(false);
