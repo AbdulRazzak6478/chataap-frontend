@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import  toast  from "react-hot-toast";
+import axios from 'axios';
 
 const SignUp = () => {
     const [loading, setLoading] = useState(false);
@@ -20,26 +22,15 @@ const SignUp = () => {
         console.log('form data : ',formData)
     }
     async function onSubmitData(event){
-        setLoading(true)
         event.preventDefault()
+        setLoading(true)
         setActive(true);
         console.log('onsubmit data click');
-        console.log('form data : ',formData)
-        setTimeout(() => {
-            console.log('signup done1')
-        }, 3000);
-        setTimeout((function(){
-                console.log('sign up done2 !');
-            })(), 2000)
-        console.log('sign up done3 !');
-        // setFormData({
-        //     userName:'',
-        //     email:'',
-        //     password:'',
-        //     confirmPassword : ''
-        // });
+        console.log('form data : ',formData);
+       
         console.log('successfully register')
-        setLoading(false)
+        toast.success("Sign Up Successfully !");
+        setLoading(false);
     }
   return (
     <>

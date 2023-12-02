@@ -5,6 +5,7 @@ import Header from './components/Header'
 import Home from './components/Home'
 import SignUp from './pages/SignUp'
 import SignIn from './pages/SignIn'
+import {Toaster} from 'react-hot-toast'
 // // import { io } from 'socket.io-client';
 // // import socketIO from 'socket.io-client';
 
@@ -34,6 +35,7 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
         </Routes>
+        <Toaster />
       </Router>
     </div>
     </>
