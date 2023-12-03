@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <>
       { !token ? (
-        <Navigate to="/login" replace={true} />
+        <Navigate to="/signin" replace={true} />
       ) : isLoading ? (
         <h1>Loading...</h1>
       ) : (
