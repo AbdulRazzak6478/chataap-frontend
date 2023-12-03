@@ -6,6 +6,7 @@ import Home from './components/Home'
 import SignUp from './pages/SignUp'
 import SignIn from './pages/SignIn'
 import {Toaster} from 'react-hot-toast'
+import Join from './pages/Join'
 // // import { io } from 'socket.io-client';
 // // import socketIO from 'socket.io-client';
 
@@ -31,6 +32,7 @@ function App() {
       <Router>
         {/* <Header /> */}
         <Routes>
+            <Route path="/" element={<Join />} />
             <Route path="/:id" element={<Home />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />

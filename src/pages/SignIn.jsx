@@ -20,7 +20,8 @@ const SignUp = () => {
         }));
     }
    
-    console.log("chatting");  
+    console.log("chatting");
+    let token = Cookies.get("jwt_token");  
     async function onSubmitData(event){
         event.preventDefault();
         setIsSignIn(false)
@@ -64,7 +65,7 @@ const SignUp = () => {
     }
   return (
     <>
-        {
+        {   token ? (<Navigate to={`/${JSON.parse(localStorage.getItem("chatAppUserId"))}`} replace={true} />):
             isSignIn ? (
                 <Navigate to={`/${JSON.parse(localStorage.getItem("chatAppUserId"))}`} replace={true} />
             ):

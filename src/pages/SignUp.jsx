@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link,Navigate } from 'react-router-dom';
 import  toast  from "react-hot-toast";
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const SignUp = () => {
     const [isSignUp, setIsSignUp] = useState(false)
@@ -22,6 +23,8 @@ const SignUp = () => {
 
         console.log('form data : ',formData)
     }
+
+    let token = Cookies.get("jwt_token");   
     async function onSubmitData(event){
         setIsSignUp(false);
         event.preventDefault()
@@ -63,7 +66,7 @@ const SignUp = () => {
     }
   return (
     <>
-        {
+        {   token ? (<Navigate to={`/${JSON.parse(localStorage.getItem("chatAppUserId"))}`} replace={true} />):
             isSignUp ? (
                     <Navigate to="/" replace={true} />
                 )
