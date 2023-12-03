@@ -2,15 +2,18 @@ import React, { useState } from 'react'
 import { Navigate, useParams } from 'react-router-dom'
 import Cookies from "js-cookie";  
 import Header from './Header';
+import { useEffect } from 'react';
 // const chatId = JSON.parse(localStorage.getItem("chatAppUserId")) ;
 // toast.success(`chat id is : ${chatId}`)
 // const name = Cookies.get('jwt_token');
 // let token = Cookies.get("jwt_token");
 const Home = () => {
+  const [isToken, setIsToken] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const { id }= useParams();
   console.log("id ",id);
   let token = Cookies.get("jwt_token");
+
   return (
     <>
       { !token ? (

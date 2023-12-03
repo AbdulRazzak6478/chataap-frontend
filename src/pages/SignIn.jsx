@@ -20,7 +20,6 @@ const SignUp = () => {
         }));
     }
    
-    console.log("chatting");
     let token = Cookies.get("jwt_token");  
     async function onSubmitData(event){
         event.preventDefault();
@@ -57,6 +56,8 @@ const SignUp = () => {
 
         // storing user id into local storage
         localStorage.setItem("chatAppUserId", JSON.stringify(user.data.data.userData.id));
+        let chatUserId = JSON.parse(localStorage.getItem("chatAppUserId"));
+        console.log('user id : ',chatUserId);
         console.log('successfully register')
         toast.success("SignIn Successfully !");
         setActive(false);

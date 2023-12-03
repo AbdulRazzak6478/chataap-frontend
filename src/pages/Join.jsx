@@ -6,7 +6,7 @@ const Join = () => {
     let chatUserId = JSON.parse(localStorage.getItem("chatAppUserId"));
     console.log('chat user id is : ',chatUserId);
     let token = Cookies.get("jwt_token"); 
-    let isTokenPresent = null ;
+    let isTokenPresent = 'token' ;
     if(!chatUserId){
         isTokenPresent = Cookies.remove("jwt_token");
         // const userId = localStorage.removeItem("chatAppUserId") ;
