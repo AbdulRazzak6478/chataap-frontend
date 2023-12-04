@@ -13,3 +13,13 @@
     /* outline: none; */
     /* border: none; */
 }
+.headSearch{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.headSearch svg{
+    font-size: 30px;
+    margin-right: 5px;
+    cursor: pointer;
+}

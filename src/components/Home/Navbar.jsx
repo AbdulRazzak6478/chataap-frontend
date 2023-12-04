@@ -3,6 +3,7 @@ import { FiMenu } from 'react-icons/fi';
 import { CgClose } from 'react-icons/cg';
 import { Link} from 'react-router-dom';
 import Cookies from 'js-cookie';
+import Search from './Search';
 const Navbar = () => {
     const [showNavList,setShowNavList] = useState(false);
     // const [IsLogout, setIsLogout] = useState(false);
@@ -28,9 +29,7 @@ const Navbar = () => {
     }
   return (
     <>
-    {
-        // IsLogout ?  (<Navigate to={`/signin`} replace={true} />):
-        (
+            
             <nav className='nav'>
                 <ul className='nav-list' style={{ display: showNavList ? "flex" : null }}>
                     <li className='nav-list-item'>
@@ -42,11 +41,12 @@ const Navbar = () => {
                             <button className='btn'onClick={logoutUser} >Logout</button>
                         </Link>
                     </li>
-                    {/* <li className='nav-list-item'>
-                        <Link to="/signin">
+                    <li className='nav-list-item'>
+                        {/* <Link to="/signin">
                             <button className='btn'>LogIn </button>
-                        </Link>
-                    </li> */}
+                        </Link> */}
+                        <Search />
+                    </li>
                 </ul>
                 <button
                     type="button"
@@ -57,8 +57,6 @@ const Navbar = () => {
                     { showNavList ? <CgClose /> : <FiMenu />}
                 </button>
             </nav>
-        )
-    }
     </>
   )
 }

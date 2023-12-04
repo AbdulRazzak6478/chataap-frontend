@@ -16,6 +16,7 @@ const Header = () => {
             Abdul Razzak
             </a>
           </h3>
+          {/* <Search /> */}
           <Navbar />
         </header>
       </div>
