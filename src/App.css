@@ -4,6 +4,7 @@
 @import './styles/Search.css';
 @import './styles/Header.css';
 @import './styles/Navbar.css';
+@import './styles/Home.css';
 
 .app{
     font-family: "Poppins", sans-serif;
