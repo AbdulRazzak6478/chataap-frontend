@@ -30,3 +30,33 @@
 .add-group-btn:hover,.add-user-btn:hover{
     background-color:rgba(0, 128, 0, 0.753);
 }
+
+.create-grp-btns{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.create-grp-btns .cancel{
+    padding: 5px 10px;
+    background-color: rgba(255, 0, 0, 0.671);
+    color:white;
+    border:none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 1rem;
+}
+.create-grp-btns .cancel:hover{
+    background-color: red;
+}
+.create-grp-btns .create{
+    padding: 5px 10px;
+    background-color: rgba(0, 128, 0, 0.792);
+    color:white;
+    border:none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 0.5rem;
+}
+.create-grp-btns .create:hover{
+    background-color: green;
+}
