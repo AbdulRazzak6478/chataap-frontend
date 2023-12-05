@@ -7,6 +7,7 @@ import { MdPersonAddAlt1 } from "react-icons/md";
 import { MdGroupAdd } from "react-icons/md";
 // import InputBox from './InputBox';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 // const chatId = JSON.parse(localStorage.getItem("chatAppUserId")) ;
 // toast.success(`chat id is : ${chatId}`)
 // const name = Cookies.get('jwt_token');
@@ -88,7 +89,12 @@ const Home = () => {
           "Content-Type": "application/json",
       },
     };
-    setSubmitClick(true)
+    setSubmitClick(true);
+    if(name.length == 0 || isUsers.length == 0)
+    {
+
+      return;
+    }
     let usersIds = '';
     fetchUsers.forEach((user)=>{
       isUsers.forEach((name,index)=>{
@@ -113,6 +119,11 @@ const Home = () => {
     console.log('create group payload is : ',createGroupPayload);
     // const createdGroup = await axios.post('http://localhost:3005/groups',createGroupPayload,customConfig);
     // console.log('group created : ',createdGroup);
+
+    setName('');
+    setIsUsers([]);
+    setIsModel(false);
+    toast.success('Group created successfully !.')
   }
 
   function onSubmitFormData(event)
