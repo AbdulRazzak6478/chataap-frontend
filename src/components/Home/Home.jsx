@@ -184,16 +184,6 @@ const Home = () => {
                 </div>
                 <div className="list">
                   <ul>
-                    {/* <li> <input type="checkbox"  name="check"  className="click" onClick={onSubmitFormData}   id="user1"/> <span>User1</span></li>
-                    <li> <input type="checkbox"  name="check"  className="click" onClick={onSubmitFormData}   id="user2"/> <span>User2</span></li>
-                    <li> <input type="checkbox"  name="check"  className="click" onClick={onSubmitFormData}   id="user3"/> <span>User3</span></li>
-                    <li> <input type="checkbox"  name="check"  className="click" onClick={onSubmitFormData}   id="user4"/> <span>User4</span></li>
-                    <li> <input type="checkbox"  name="check"  className="click" onClick={onSubmitFormData}   id="user5"/> <span>User5</span></li> */}
-                    {/* <li> <input type="checkbox"  name="check"  className="click" onClick={onSubmitFormData}   id="user6"/> <span>User5</span></li>
-                    <li> <input type="checkbox"  name="check"  className="click" onClick={onSubmitFormData}   id="user7"/> <span>User5</span></li>
-                    <li> <input type="checkbox"  name="check"  className="click" onClick={onSubmitFormData}   id="user8"/> <span>User5</span></li>
-                    <li> <input type="checkbox"  name="check"  className="click" onClick={onSubmitFormData}   id="user9"/> <span>User5</span></li>
-                    <li> <input type="checkbox"  name="check"  className="click" onClick={onSubmitFormData}   id="user10"/> <span>User5</span></li> */}
                     {fetchUsers.map((user,index)=><li key={index}> <input type="checkbox"  name="check"  className="click" onClick={onSubmitFormData}   id={`${user.name}`}/> <span>{user.name}</span></li>
                     )}
                   </ul> 
@@ -211,11 +201,6 @@ const Home = () => {
                 </div>
                 <div className="list">
                   <ul>
-                    {/* <li> <input type="radio" name="check" className="click" onClick={(e)=>setSelectedUser(e.target.id)}   id="user1"/> <span>User1</span></li>
-                    <li> <input type="radio"  name="check" className="click" onClick={(e)=>setSelectedUser(e.target.id)}  id="user2"/> <span>User2</span></li>
-                    <li> <input type="radio"  name="check" className="click" onClick={(e)=>setSelectedUser(e.target.id)}  id="user3"/> <span>User3</span></li>
-                    <li> <input type="radio"  name="check" className="click" onClick={(e)=>setSelectedUser(e.target.id)}  id="user4"/> <span>User4</span></li>
-                    <li> <input type="radio"  name="check"  className="click" onClick={(e)=>setSelectedUser(e.target.id)} id="user5"/> <span>User5</span></li> */}
                     {fetchUsers.map((user,index)=><li key={index}> <input type="radio"  name="check"  className="click" onClick={(e)=>setSelectedUser(e.target.id)}   id={user.name}/> <span>{user.name}</span></li>
                     )}
                   </ul> 
