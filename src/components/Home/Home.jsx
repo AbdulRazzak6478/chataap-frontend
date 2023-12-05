@@ -81,6 +81,37 @@ const Home = () => {
     console.log('on cancel name : ',name)
   }
 
+  async function onCreateUser(){
+    const customConfig = {
+      headers: {
+          "Content-Type": "application/json",
+      },
+    };
+    setSubmitClick(true);
+    if(selectedUser.length == 0)
+    {
+      alert('user not selected');
+      return;
+    }
+    let usersIds = '';
+    usersIds+=JSON.parse(localStorage.getItem("chatAppUserId"))+',';
+    fetchUsers.forEach((user)=>{
+      if(user.name == selectedUser){
+        usersIds+=user._id;
+      }
+    });
+    const createUserPayload = {
+      // name : name,
+      // isPersonal : 0,
+      // admin : JSON.parse(localStorage.getItem("chatAppUserId")), 
+      users : usersIds,
+    };
+    console.log('create group payload is : ',createUserPayload);
+     const createdUser = await axios.post('http://localhost:3005/chats',createUserPayload,customConfig);
+    console.log('group created : ',createdUser);
+    setIsModel(false);
+    toast.success('User created successfully !.')
+  }
 
   async function onCreateGroup()
   {
@@ -212,7 +243,7 @@ const Home = () => {
                 </div>
                 <div className="create-grp-btns">
                   <button className='cancel' onClick={onCancelModel}>Cancel</button>
-                  <button className='create'>Start Chat</button>
+                  <button className='create' onClick={onCreateUser}>Start Chat</button>
                 </div>
               </div>
           </div>
