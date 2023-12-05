@@ -5,7 +5,8 @@ import Header from './Header';
 import { useEffect } from 'react';
 import { MdPersonAddAlt1 } from "react-icons/md";
 import { MdGroupAdd } from "react-icons/md";
-import InputBox from './InputBox';
+// import InputBox from './InputBox';
+import axios from 'axios';
 // const chatId = JSON.parse(localStorage.getItem("chatAppUserId")) ;
 // toast.success(`chat id is : ${chatId}`)
 // const name = Cookies.get('jwt_token');
@@ -15,6 +16,8 @@ const Home = () => {
     name : '',
     users: [],
   })
+  const [fetchUsers, setFetchUsers] = useState([]);
+
   const [submitClick,setSubmitClick]=useState(false);
   const [addUser,setAddUser] = useState('');
   const [isModel,setIsModel] = useState(false);
@@ -25,7 +28,38 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedUser, setSelectedUser] = useState('')
   const { id }= useParams();
-  // console.log("id ",id);
+
+
+  async function gettingUsers()
+  {
+    const customConfig = {
+      headers: {
+          "Content-Type": "application/json",
+      },
+    };
+    const chatUsers = await axios("http://localhost:3005/users");
+    console.log(' chat users : ',chatUsers.data.data);
+    setFetchUsers(chatUsers.data.data)
+    // chatUsers.data.data.forEach((user)=>console.log(user.email));
+    console.log(' chat user id : ',chatUsers.data.data[0]['_id']);
+  }
+
+  useEffect(function(){
+    gettingUsers();
+  }, [])
+  let myusers = [
+    {name:'abdul',email:'ab1@gmail.com'},
+    {name:'razzak',email:'ab2@gmail.com'},
+    {name:'mohammed',email:'ab3@gmail.com'},
+    {name:'qureshi',email:'ab4@gmail.com'},
+    {name:'ghouse',email:'ab5@gmail.com'},
+    {name:'azam',email:'ab6@gmail.com'},
+    {name:'immu',email:'ab7@gmail.com'},
+  ];
+
+  myusers.map((user)=>console.log(user.name,user.email));
+  
+
   let token = Cookies.get("jwt_token");
   const obj ={
     _id:'1234567890',
@@ -36,6 +70,7 @@ const Home = () => {
   // console.log("2",obj._id);
   // console.log("3",obj['_id']);
   // let arr = [];
+
   function onCancelModel()
   {
     console.log('on cancel name : ',name)
@@ -44,12 +79,42 @@ const Home = () => {
     setName('');
     console.log('on cancel name : ',name)
   }
-  function onCreateGroup()
+
+
+  async function onCreateGroup()
   {
+    const customConfig = {
+      headers: {
+          "Content-Type": "application/json",
+      },
+    };
     setSubmitClick(true)
-    // alert('on submit click')
-    alert(`group name :${name}, users : ${isUsers}`)
+    let usersIds = '';
+    fetchUsers.forEach((user)=>{
+      isUsers.forEach((name,index)=>{
+        if(name==user.name){
+          if(isUsers.length-1==index)
+          {
+            usersIds+=user['_id'];
+          }
+          else{
+            usersIds+=user['_id']+',';
+          }
+        }
+      })
+    });
+    console.log('users ids of the selected users : ',usersIds);
+    const createGroupPayload = {
+      name : name,
+      isPersonal : 0,
+      admin : JSON.parse(localStorage.getItem("chatAppUserId")), 
+      users : usersIds,
+    };
+    console.log('create group payload is : ',createGroupPayload);
+    // const createdGroup = await axios.post('http://localhost:3005/groups',createGroupPayload,customConfig);
+    // console.log('group created : ',createdGroup);
   }
+
   function onSubmitFormData(event)
   {
     if(event.target.checked)
@@ -62,13 +127,8 @@ const Home = () => {
       console.log('in false ',event.target.id, event.target.checked)
       setIsUsers([...isUsers.filter(ele=>event.target.id!=ele)])
     }
-    console.log('array : ',isUsers)
-    console.log('formData : ',formData);
-    console.log('name : ',name)
   }
-  // console.log('model : ',isModel)
-  // console.log('group model: ',groupModel)
-  // console.log('user model : ',userModel)
+  
   return (
     <>
       { !token ? (
@@ -103,17 +163,18 @@ const Home = () => {
                 </div>
                 <div className="list">
                   <ul>
-                    <li> <input type="checkbox"  name="check"  className="click" onClick={onSubmitFormData}   id="user1"/> <span>User1</span></li>
+                    {/* <li> <input type="checkbox"  name="check"  className="click" onClick={onSubmitFormData}   id="user1"/> <span>User1</span></li>
                     <li> <input type="checkbox"  name="check"  className="click" onClick={onSubmitFormData}   id="user2"/> <span>User2</span></li>
                     <li> <input type="checkbox"  name="check"  className="click" onClick={onSubmitFormData}   id="user3"/> <span>User3</span></li>
                     <li> <input type="checkbox"  name="check"  className="click" onClick={onSubmitFormData}   id="user4"/> <span>User4</span></li>
-                    <li> <input type="checkbox"  name="check"  className="click" onClick={onSubmitFormData}   id="user5"/> <span>User5</span></li>
-                    <li> <input type="checkbox"  name="check"  className="click" onClick={onSubmitFormData}   id="user6"/> <span>User5</span></li>
+                    <li> <input type="checkbox"  name="check"  className="click" onClick={onSubmitFormData}   id="user5"/> <span>User5</span></li> */}
+                    {/* <li> <input type="checkbox"  name="check"  className="click" onClick={onSubmitFormData}   id="user6"/> <span>User5</span></li>
                     <li> <input type="checkbox"  name="check"  className="click" onClick={onSubmitFormData}   id="user7"/> <span>User5</span></li>
                     <li> <input type="checkbox"  name="check"  className="click" onClick={onSubmitFormData}   id="user8"/> <span>User5</span></li>
                     <li> <input type="checkbox"  name="check"  className="click" onClick={onSubmitFormData}   id="user9"/> <span>User5</span></li>
-                    <li> <input type="checkbox"  name="check"  className="click" onClick={onSubmitFormData}   id="user10"/> <span>User5</span></li>
-                    <li> <input type="checkbox"  name="check"  className="click" onClick={onSubmitFormData}   id="user11"/> <span>User5</span></li>
+                    <li> <input type="checkbox"  name="check"  className="click" onClick={onSubmitFormData}   id="user10"/> <span>User5</span></li> */}
+                    {fetchUsers.map((user,index)=><li key={index}> <input type="checkbox"  name="check"  className="click" onClick={onSubmitFormData}   id={`${user.name}`}/> <span>{user.name}</span></li>
+                    )}
                   </ul> 
                 </div>
                 <div className="create-grp-btns">
@@ -129,11 +190,13 @@ const Home = () => {
                 </div>
                 <div className="list">
                   <ul>
-                    <li> <input type="radio" name="check" className="click" onClick={(e)=>setSelectedUser(e.target.id)}   id="user1"/> <span>User1</span></li>
+                    {/* <li> <input type="radio" name="check" className="click" onClick={(e)=>setSelectedUser(e.target.id)}   id="user1"/> <span>User1</span></li>
                     <li> <input type="radio"  name="check" className="click" onClick={(e)=>setSelectedUser(e.target.id)}  id="user2"/> <span>User2</span></li>
                     <li> <input type="radio"  name="check" className="click" onClick={(e)=>setSelectedUser(e.target.id)}  id="user3"/> <span>User3</span></li>
                     <li> <input type="radio"  name="check" className="click" onClick={(e)=>setSelectedUser(e.target.id)}  id="user4"/> <span>User4</span></li>
-                    <li> <input type="radio"  name="check"  className="click" onClick={(e)=>setSelectedUser(e.target.id)} id="user5"/> <span>User5</span></li>
+                    <li> <input type="radio"  name="check"  className="click" onClick={(e)=>setSelectedUser(e.target.id)} id="user5"/> <span>User5</span></li> */}
+                    {fetchUsers.map((user,index)=><li key={index}> <input type="radio"  name="check"  className="click" onClick={(e)=>setSelectedUser(e.target.id)}   id={user.name}/> <span>{user.name}</span></li>
+                    )}
                   </ul> 
                 </div>
                 <div className="create-grp-btns">

@@ -12,7 +12,6 @@ const Navbar = () => {
         setShowNavList(!showNavList);
     }
     let chatUserId = JSON.parse(localStorage.getItem("chatAppUserId"));
-    console.log('before logout : ',chatUserId)
     function logoutUser(){
         console.log('in logout function')
         chatUserId = localStorage.removeItem("chatAppUserId")

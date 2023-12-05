@@ -6,9 +6,9 @@ import Navbar from "./Navbar";
 
 const Header = () => {
   let chatUserId = JSON.parse(localStorage.getItem("chatAppUserId"));
-  useEffect(() => {
-    console.log('logout from header');
-  }, [chatUserId])
+  // useEffect(() => {
+  //   console.log('logout from header');
+  // }, [chatUserId])
   
   return (
     <>
