@@ -41,25 +41,12 @@ const Home = () => {
     const chatUsers = await axios("http://localhost:3005/users");
     console.log(' chat users : ',chatUsers.data.data);
     setFetchUsers(chatUsers.data.data)
-    // chatUsers.data.data.forEach((user)=>console.log(user.email));
-    console.log(' chat user id : ',chatUsers.data.data[0]['_id']);
   }
 
+  // fetching users when home page loaded
   useEffect(function(){
     gettingUsers();
   }, [])
-  let myusers = [
-    {name:'abdul',email:'ab1@gmail.com'},
-    {name:'razzak',email:'ab2@gmail.com'},
-    {name:'mohammed',email:'ab3@gmail.com'},
-    {name:'qureshi',email:'ab4@gmail.com'},
-    {name:'ghouse',email:'ab5@gmail.com'},
-    {name:'azam',email:'ab6@gmail.com'},
-    {name:'immu',email:'ab7@gmail.com'},
-  ];
-
-  myusers.map((user)=>console.log(user.name,user.email));
-  
 
   let token = Cookies.get("jwt_token");
   const obj ={
@@ -78,7 +65,6 @@ const Home = () => {
     setIsModel(false);
     setIsUsers([]);
     setName('');
-    console.log('on cancel name : ',name)
   }
 
   async function onCreateUser(){
@@ -90,7 +76,6 @@ const Home = () => {
     setSubmitClick(true);
     if(selectedUser.length == 0)
     {
-      alert('user not selected');
       return;
     }
     let usersIds = '';
@@ -100,10 +85,7 @@ const Home = () => {
         usersIds+=user._id;
       }
     });
-    const createUserPayload = {
-      // name : name,
-      // isPersonal : 0,
-      // admin : JSON.parse(localStorage.getItem("chatAppUserId")), 
+    const createUserPayload = { 
       users : usersIds,
     };
     console.log('create group payload is : ',createUserPayload);
@@ -123,10 +105,10 @@ const Home = () => {
     setSubmitClick(true);
     if(name.length == 0 || isUsers.length == 0)
     {
-
       return;
     }
     let usersIds = '';
+    // getting ids of selected users to add in group users
     fetchUsers.forEach((user)=>{
       isUsers.forEach((name,index)=>{
         if(name==user.name){
@@ -148,8 +130,8 @@ const Home = () => {
       users : usersIds,
     };
     console.log('create group payload is : ',createGroupPayload);
-    // const createdGroup = await axios.post('http://localhost:3005/groups',createGroupPayload,customConfig);
-    // console.log('group created : ',createdGroup);
+    const createdGroup = await axios.post('http://localhost:3005/groups',createGroupPayload,customConfig);
+    console.log('group created : ',createdGroup);
 
     setName('');
     setIsUsers([]);
@@ -162,11 +144,8 @@ const Home = () => {
     if(event.target.checked)
     {
       setIsUsers([...isUsers,event.target.id]);
-      console.log('user selected :' ,event.target.checked);
-      console.log('user name: ',event.target.id);
     }
     else{
-      console.log('in false ',event.target.id, event.target.checked)
       setIsUsers([...isUsers.filter(ele=>event.target.id!=ele)])
     }
   }
