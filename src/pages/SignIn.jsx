@@ -79,7 +79,7 @@ const SignUp = () => {
                         <div className={`${!active ? 'solve': formData.email.length === 0 ? 'error': 'solve' } `}>Email* is required.</div>
                     </div>
                     <div className="field">
-                        <div >password* </div><input type="password" id="password" value={formData.password} onChange={OnSetFormData}  className='hide' placeholder='Enter Password ...' required />
+                        <div >password* </div><input type="password" id="password" value={formData.password} onChange={OnSetFormData}  className='' placeholder='Enter Password ...' required />
                         <div className={`${!active ? 'solve': formData.password.length === 0 ? 'error': 'solve' } `}>Password* is required.</div>
                     </div>
                     <button type="submit" className={`register sign ${loading ? 'load':''}`} onClick={onSubmitData}>{ loading ? "Loading ..." : "Sign In"}</button>
