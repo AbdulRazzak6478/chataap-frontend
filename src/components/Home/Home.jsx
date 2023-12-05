@@ -44,6 +44,12 @@ const Home = () => {
     setName('');
     console.log('on cancel name : ',name)
   }
+  function onCreateGroup()
+  {
+    setSubmitClick(true)
+    // alert('on submit click')
+    alert(`group name :${name}, users : ${isUsers}`)
+  }
   function onSubmitFormData(event)
   {
     if(event.target.checked)
@@ -112,7 +118,7 @@ const Home = () => {
                 </div>
                 <div className="create-grp-btns">
                   <button className='cancel' onClick={onCancelModel}>Cancel</button>
-                  <button className='create'>Create Group</button>
+                  <button className='create' onClick={onCreateGroup}>Create Group</button>
                 </div>
               </div>
               <div className={`user-box  ${userModel ? '':'user-model'}`}>
