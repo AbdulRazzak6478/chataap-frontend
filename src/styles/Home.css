@@ -145,10 +145,10 @@ input{
 .group-list-item .group-name svg,.user-list-item .user-name svg{
     margin-right: 1rem;
 }
-.group-options{
+.group-options,.user-options{
     position: relative;
 }
-.group-options .group-options-list{
+.group-options .group-options-list, .user-options .user-options-list{
     position: absolute;
     top:0px;
     right : 20px;
@@ -158,11 +158,11 @@ input{
     background-color: black;
     border-bottom: 2px solid white;
 }
-.group-options .group-options-list div{
+.group-options .group-options-list div,.user-options .user-options-list div{
     /* border-bottom: 1px solid white; */
     padding: 2 px;
 }
-.group-options .group-options-list div:hover{
+.group-options .group-options-list div:hover, .user-options .user-options-list div:hover{
     /* border-bottom: 1px solid white; */
     background-color: lightgray;
     color:black;
