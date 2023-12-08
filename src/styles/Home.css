@@ -114,6 +114,36 @@ input{
 .user-model{
     display: none;
 }
-/* .list-container{
-    font-size: 50px;
-} */
+
+/* group and user list styles */
+
+.list-container{
+    /* font-size: 20px; */
+    max-width: 1100px;
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    /* flex-wrap: wrap; */
+    justify-content: center;
+    align-items: center;
+}
+
+.group-list , .user-list{
+    width: 50%;
+    border:2px solid black;
+    border-radius: 10px;
+}
+.group-list-item, .user-list-item{
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    border-bottom: 1px solid black;
+}
+.group-list-item:hover, .user-list-item:hover{
+    background-color: rgba(128, 128, 128, 0.446);
+}
+.group-list-item .group-name svg,.user-list-item .user-name svg{
+    margin-right: 1rem;
+}
