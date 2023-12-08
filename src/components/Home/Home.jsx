@@ -28,7 +28,8 @@ const Home = () => {
   const [name, setName] = useState('')
   const [isUsers, setIsUsers] = useState([])
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedUser, setSelectedUser] = useState('')
+  const [selectedUser, setSelectedUser] = useState('');
+  const [options, setOptions] = useState(false)
   const { id }= useParams();
 
 
@@ -226,11 +227,14 @@ const Home = () => {
                     <span>Chaddy Buddies</span>
                   </div>
                   <div className="group-options">
-                    <SlOptionsVertical />
-                    <div className="group-options-list">
-                      <div>Delete</div>
-                      <div>Edit</div>
-                    </div>
+                    <SlOptionsVertical onClick={(e)=>setOptions(true)} />
+                    { 
+                      options && <div className="group-options-list">
+                        <div>Delete</div>
+                        <div>Edit</div>
+                        <div onClick={(e)=>setOptions(false)}>Cancel</div>
+                      </div>
+                    }
                   </div>
                 </div>
                 <div className="group-list-item">
@@ -238,35 +242,80 @@ const Home = () => {
                     <MdGroupAdd />
                     <span>CSE Buddies</span>
                   </div>
-                  <div className="group-options"><SlOptionsVertical /></div>
+                  <div className="group-options">
+                  <SlOptionsVertical onClick={(e)=>setOptions(true)} />
+                    { 
+                      options && <div className="group-options-list">
+                        <div>Delete</div>
+                        <div>Edit</div>
+                        <div onClick={(e)=>setOptions(false)}>Cancel</div>
+                      </div>
+                    }
+                  </div>
                 </div>
                 <div className="group-list-item">
                   <div className="group-name">
                     <MdGroupAdd />
                     <span>IT Software hiring</span>
                   </div>
-                  <div className="group-options"><SlOptionsVertical /></div>
+                  <div className="group-options">
+                  <SlOptionsVertical onClick={(e)=>setOptions(true)} />
+                    { 
+                      options && <div className="group-options-list">
+                        <div>Delete</div>
+                        <div>Edit</div>
+                        <div onClick={(e)=>setOptions(false)}>Cancel</div>
+                      </div>
+                    }
+                  </div>
                 </div>
                 <div className="group-list-item">
                   <div className="group-name">
                     <MdGroupAdd />
                     <span>Web Development</span>
                   </div>
-                  <div className="group-options"><SlOptionsVertical /></div>
+                  <div className="group-options">
+                  <SlOptionsVertical onClick={(e)=>setOptions(true)} />
+                    { 
+                      options && <div className="group-options-list">
+                        <div>Delete</div>
+                        <div>Edit</div>
+                        <div onClick={(e)=>setOptions(false)}>Cancel</div>
+                      </div>
+                    }
+                  </div>
                 </div>
                 <div className="group-list-item">
                   <div className="group-name">
                     <MdGroupAdd />
                     <span>Backend Development</span>
                   </div>
-                  <div className="group-options"><SlOptionsVertical /></div>
+                  <div className="group-options">
+                  <SlOptionsVertical onClick={(e)=>setOptions(true)} />
+                    { 
+                      options && <div className="group-options-list">
+                        <div>Delete</div>
+                        <div>Edit</div>
+                        <div onClick={(e)=>setOptions(false)}>Cancel</div>
+                      </div>
+                    }
+                  </div>
                 </div>
                 <div className="group-list-item">
                   <div className="group-name">
                     <MdGroupAdd />
                     <span>Friends forever</span>
                   </div>
-                  <div className="group-options"><SlOptionsVertical /></div>
+                  <div className="group-options">
+                  <SlOptionsVertical onClick={(e)=>setOptions(true)} />
+                    { 
+                      options && <div className="group-options-list">
+                        <div>Delete</div>
+                        <div>Edit</div>
+                        <div onClick={(e)=>setOptions(false)}>Cancel</div>
+                      </div>
+                    }
+                  </div>
                 </div>
               </div>
 
@@ -278,7 +327,16 @@ const Home = () => {
                     <MdPersonAddAlt1 />
                     <span>Mohammed</span>
                   </div>
-                  <div className="user-options"><SlOptionsVertical /></div>
+                  <div className="user-options">
+                  <SlOptionsVertical onClick={(e)=>setOptions(true)} />
+                    { 
+                      options && <div className="group-options-list">
+                        <div>Delete</div>
+                        <div>Edit</div>
+                        <div onClick={(e)=>setOptions(false)}>Cancel</div>
+                      </div>
+                    }
+                  </div>
                 </div>
                 <div className="user-list-item">
                   <div className="user-name">
