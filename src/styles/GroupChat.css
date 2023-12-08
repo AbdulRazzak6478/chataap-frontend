@@ -1,0 +1,41 @@
+
+
+.group-chat-box{
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: cyan; */
+    border:2px solid black;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.group-header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+    cursor: pointer;
+    border-bottom: 2px solid black;
+}
+.group-header .grp-profile svg:hover{
+    transform: scale(1.2);
+}
+.group-header .grp-head svg{
+    margin-right: 1rem;
+}
+.chats-container{
+    margin-top: 0.5rem;
+    height:calc(100vh - 220px);
+    /* position: relative; */
+}
+.message-box{
+    position: absolute;
+    bottom: 0px;
+    left:50%;
+    transform: translate(-50%);
+}

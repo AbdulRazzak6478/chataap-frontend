@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Navigate, useParams } from 'react-router-dom'
+import { Link, Navigate, useParams } from 'react-router-dom'
 import Cookies from "js-cookie";  
 import Header from './Header';
 import { useEffect } from 'react';
@@ -418,6 +418,10 @@ const Home = () => {
                 </div>
               </div>
             </div>
+
+            <Link to={`/${id}/groups/CSEBuddies`}>
+              <button>Group</button>
+            </Link>
           </div>
         </>
       )}

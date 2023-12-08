@@ -5,6 +5,7 @@
 @import './styles/Header.css';
 @import './styles/Navbar.css';
 @import './styles/Home.css';
+@import './styles/GroupChat.css';
 body{
     margin: 0;
     padding: 0;
