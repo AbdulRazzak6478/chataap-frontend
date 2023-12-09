@@ -1,4 +1,7 @@
 
+.container{
+    margin: 0 1rem;
+}
 
 .group-chat-box{
     max-width: 700px;
@@ -11,6 +14,7 @@
     border:2px solid black;
     border-radius: 10px;
     padding: 1rem;
+    /* width: 95%; */
 }
 
 .group-header{
@@ -31,11 +35,16 @@
 .chats-container{
     margin-top: 0.5rem;
     height:calc(100vh - 220px);
-    /* position: relative; */
+   border:1px solid black;
 }
-.message-box{
-    position: absolute;
-    bottom: 0px;
-    left:50%;
-    transform: translate(-50%);
+
+.typing-box{
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border:2px solid black;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
 }
