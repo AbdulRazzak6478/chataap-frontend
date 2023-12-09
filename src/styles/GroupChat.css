@@ -26,11 +26,16 @@
     cursor: pointer;
     border-bottom: 2px solid black;
 }
+.group-header .grp-profile svg{
+    color:green;
+}
 .group-header .grp-profile svg:hover{
     transform: scale(1.2);
+
 }
 .group-header .grp-head svg{
     margin-right: 1rem;
+    color:green
 }
 .chats-container{
     margin-top: 0.5rem;
@@ -46,5 +51,31 @@
     align-items: center;
     border:2px solid black;
     padding: 0.5rem 1rem;
-    border-radius: 10px;
+    border-radius: 50px;
+    /* background-color: rgb(107, 56, 56); */
+    /* color:white; */
+}
+.typing-box input{
+    width: 100%;
+    border:none;
+    outline: none;
+    font-size: 20px;
+    /* background-color: rgba(107, 56, 56, 0.146); */
+    /* color:rgb(220, 203, 203); */
+}
+.typing-box input::placeholder{
+    font-weight: 600;
+}
+.typing-box .send-icon{
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    /* padding: 0.5em 0.5em; */
+    padding: 2px;
+    background-color: green;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
 }
