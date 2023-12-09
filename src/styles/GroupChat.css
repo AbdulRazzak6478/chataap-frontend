@@ -39,10 +39,55 @@
 }
 .chats-container{
     margin-top: 0.5rem;
-    height:calc(100vh - 220px);
-   border:1px solid black;
+    height:calc(100vh - 250px);
+   border:3px solid green;
+   width: 100%;
+   border-radius: 5px;
+   padding-top: 1rem;
+   overflow-y: scroll;
 }
 
+.other{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.my{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+.wrapper{
+    background-color: rgb(73, 200, 200);
+    padding: 5px;
+    border-radius:5px;
+    margin-left:5px;
+    max-width: 250px;
+    margin-top: 0.5rem;
+}
+/* .otherwrapper{
+    background-color: rgb(73, 200, 200);
+} */
+.wrapper .other-name,.wrapper .my-name{
+    font-size: 10px;
+    padding: 0 5px;
+}
+.wrapper .message,.wrapper .message{
+    padding: 0 5px;
+}
+.mywrapper{
+    background-color: rgba(0, 128, 0, 0.618);
+    margin-right: 5px;
+} 
+.wrapper .message {
+    display: flex;
+    flex-direction: column;
+}
+.wrapper .message .timestamp{
+    font-size: 8px;
+    text-align: end;
+}
 .typing-box{
     max-width: 700px;
     margin: 0 auto;
