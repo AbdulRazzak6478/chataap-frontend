@@ -40,15 +40,19 @@ const Home = () => {
           "Content-Type": "application/json",
       },
     };
+    const user = await axios(`http://localhost:3005/users/${id}`);
+    console.log(' user : ',user.data.data);
+
     const chatUsers = await axios("http://localhost:3005/users");
     console.log(' chat users : ',chatUsers.data.data);
+
     setFetchUsers(chatUsers.data.data)
   }
 
   // fetching users when home page loaded
-  // useEffect(function(){
-  //   gettingUsers();
-  // }, [])
+  useEffect(function(){
+    gettingUsers();
+  }, []) 
  
 
   let token = Cookies.get("jwt_token");
@@ -153,6 +157,17 @@ const Home = () => {
     }
   }
   
+  useEffect(() => {
+      // (async()=>{
+      //   const user = await 
+      // })()
+  
+    return () => {
+      
+    }
+  }, [])
+  
+
   return (
     <>
       { !token ? (

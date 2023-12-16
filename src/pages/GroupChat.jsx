@@ -12,8 +12,8 @@ import socketIO from "socket.io-client";
 let socket;
 let ENDPOINT = "http://localhost:3005/";
 const PersonalChat = () => {
-  const { userid, chatUserId } = useParams();
-  console.log("data", userid, chatUserId);
+  const { userid, groupid } = useParams();
+  console.log("data", userid, groupid);
   const [chatData, setChatData] = useState([]);
   let chatFlag;
 
@@ -21,7 +21,7 @@ const PersonalChat = () => {
     let sendBtn = document.querySelector("#typed-msg").value;
     console.log("typed message : ", sendBtn);
 
-    socket.emit("user-message", { userid, chatUserId, message: sendBtn });
+    socket.emit("user-message", { userid, groupid, message: sendBtn });
     document.querySelector("#typed-msg").value = "";
     console.log("messages : ", chatData);
   }
@@ -31,7 +31,7 @@ const PersonalChat = () => {
     socket.on("connect", () => {
       console.log("connected");
     });
-    socket.emit("joined", { chatUserId });
+    socket.emit("joined", { groupid });
 
     socket.on("userJoined ", (data) => {
       console.log(data.message);
