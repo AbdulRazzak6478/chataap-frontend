@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Header from "../components/Home/Header";
-import { MdGroupAdd } from "react-icons/md";
+import { MdGroupAdd, MdPersonAddAlt1 } from "react-icons/md";
 import { SlOptionsVertical } from "react-icons/sl";
 import { FaCircleArrowRight } from "react-icons/fa6";
 import TypingBox from "../components/Chats/TypingBox";
@@ -13,7 +13,7 @@ import socketIO from 'socket.io-client';
 let socket;
 const PersonalChat = () => {
   const { userid, chatUserId } = useParams();
-  console.log("data", userid, groupid);
+  console.log("data", userid, chatUserId);
   
   return (
     <>
@@ -22,7 +22,7 @@ const PersonalChat = () => {
         <div className="group-chat-box">
           <div className="group-header">
             <div className="grp-head">
-              <MdGroupAdd />
+              <MdPersonAddAlt1 />
               <span>Qureshi</span>
             </div>
             <div className="grp-profile">

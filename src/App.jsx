@@ -8,6 +8,7 @@ import SignIn from './pages/SignIn'
 import {Toaster} from 'react-hot-toast'
 import Join from './pages/Join'
 import GroupChat from './pages/GroupChat'
+import PersonalChat from './pages/PersonalChat'
 // // import { io } from 'socket.io-client';
 // // import socketIO from 'socket.io-client';
 
@@ -38,6 +39,7 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/:userid/groups/:groupid" element={<GroupChat />} />
+            <Route path="/:userid/chats/:chatUserId" element={<PersonalChat />} />
         </Routes>
         <Toaster /> 
       </Router>

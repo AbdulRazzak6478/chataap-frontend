@@ -422,6 +422,9 @@ const Home = () => {
             <Link to={`/${id}/groups/CSEBuddies`}>
               <button>Group</button>
             </Link>
+            <Link to={`/${id}/chats/qureshi`}>
+              <button>UserChat</button>
+            </Link>
           </div>
         </>
       )}
