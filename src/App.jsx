@@ -37,7 +37,7 @@ function App() {
             <Route path="/:id" element={<Home />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
-            <Route path="/:id/groups/:id" element={<GroupChat />} />
+            <Route path="/:userid/groups/:groupid" element={<GroupChat />} />
         </Routes>
         <Toaster /> 
       </Router>
