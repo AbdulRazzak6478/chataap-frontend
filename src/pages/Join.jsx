@@ -10,7 +10,7 @@ const Join = () => {
     if(!chatUserId){
         isTokenPresent = Cookies.remove("jwt_token");
         // const userId = localStorage.removeItem("chatAppUserId") ;
-        // console.log('user id : ',userId)
+        // console.log('user id : ',userId);
         console.log('after removing the token from cookies : ',isTokenPresent);
     }
   return (

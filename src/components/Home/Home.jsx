@@ -51,7 +51,7 @@ const Home = () => {
 
   // fetching users when home page loaded
   useEffect(function(){
-    gettingUsers();
+    // gettingUsers();
   }, []) 
  
 

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import { BrowserRouter as Router , Routes, Route } from 'react-router-dom'
 import Header from './components/Home/Header'
@@ -9,6 +9,7 @@ import {Toaster} from 'react-hot-toast'
 import Join from './pages/Join'
 import GroupChat from './pages/GroupChat'
 import PersonalChat from './pages/PersonalChat'
+import axios from 'axios'
 // // import { io } from 'socket.io-client';
 // // import socketIO from 'socket.io-client';
 
@@ -28,6 +29,11 @@ import PersonalChat from './pages/PersonalChat'
 // // const socket = io('http://localhost:3000/');
 // // const socket = io();
 function App() {
+  // useEffect(async() => {
+  //   const apiCalling = await axios.get('http://universities.hipolabs.com/search?country=United+States');
+  //   console.log('api data : ',apiCalling);
+  // }, [])
+  
   return (
     <>
     <div className="app">

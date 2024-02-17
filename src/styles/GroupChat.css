@@ -10,7 +10,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* background-color: cyan; */
+
     border:2px solid black;
     border-radius: 10px;
     padding: 1rem;
@@ -48,44 +48,55 @@
 .chats-container{
     margin-top: 0.5rem;
     height:calc(100vh - 250px);
-   border:3px solid green;
-   width: 100%;
-   border-radius: 5px;
-   padding-top: 1rem;
-   overflow-y: scroll;
+    border:3px solid green;
+    width: 100%;
+    border-radius: 5px;
+    padding-top: 1rem;
+    overflow-y: scroll;
 }
 
-.other{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
 .my{
     width: 100%;
     display: flex;
     justify-content: flex-end;
 }
+.other{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
 .wrapper{
     background-color: rgb(73, 200, 200);
+    background-color: #128c7e;
+    background-color: #19a24c;
+    background-color:  #00a98f;
     padding: 5px;
     border-radius:5px;
     margin-left:5px;
     max-width: 250px;
     margin-top: 0.5rem;
 }
-/* .otherwrapper{
-    background-color: rgb(73, 200, 200);
-} */
+.otherwrapper{
+    /* Hex: #00a98f */
+    max-width: 250px;
+}
+/* https://www.designpieces.com/palette/whatsapp-color-palette-hex-and-rgb/ */
 .wrapper .other-name,.wrapper .my-name{
     font-size: 10px;
     padding: 0 5px;
 }
 .wrapper .message,.wrapper .message{
     padding: 0 5px;
+
 }
 .mywrapper{
-    background-color: rgba(0, 128, 0, 0.618);
+    background-color:  #075e54;
+    background-color:   #ece5dd;
+    background-color:   #34b7f1;
+    background-color:  #128c7e;
+    background-color:  #00a98f;
+    background-color:  #25d366;
+    background-color:  #4fcb7c;
     margin-right: 5px;
 } 
 .wrapper .message {
@@ -105,16 +116,14 @@
     border:2px solid black;
     padding: 0.5rem 1rem;
     border-radius: 50px;
-    /* background-color: rgb(107, 56, 56); */
-    /* color:white; */
+
 }
 .typing-box input{
     width: 100%;
     border:none;
     outline: none;
     font-size: 20px;
-    /* background-color: rgba(107, 56, 56, 0.146); */
-    /* color:rgb(220, 203, 203); */
+
 }
 .typing-box input::placeholder{
     font-weight: 600;
@@ -123,7 +132,6 @@
     cursor: pointer;
     width: 30px;
     height: 30px;
-    /* padding: 0.5em 0.5em; */
     padding: 2px;
     background-color: green;
     border-radius: 50%;
