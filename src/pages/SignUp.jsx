@@ -44,7 +44,8 @@ const SignUp = () => {
           };
         const user = await axios.post("http://localhost:3005/register",userDataPayload,customConfig);
         // const user = '1234567890'
-        console.log('user  : ',user.data.data);
+        console.log('user  : ',user);
+        console.log('user details : ',user.data.data._id);
         if(user.data.data.exist)
         {
             toast.error(`${user.data.data.message} , Please Login`);
@@ -61,8 +62,9 @@ const SignUp = () => {
         toast.success("Sign Up Successfully !");
         setActive(false);  
         setLoading(false);
-        localStorage.setItem("chatAppUserId", JSON.stringify(user.data.data.id));
-        setIsSignUp(true)
+        localStorage.setItem("chatAppUserId", user?.data?.data?._id);
+        console.log('user id : ',localStorage.getItem('chatAppUserId'));
+        setIsSignUp(true);
     }
   return (
     <>

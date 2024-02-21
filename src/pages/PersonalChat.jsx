@@ -34,7 +34,7 @@ const PersonalChat = () => {
     socket.emit("joined", { groupid });
 
     socket.on("userJoined ", (data) => {
-      console.log(data.message);
+      console.log('user joined',data);
     });
 
     socket.on("welcome", (data) => {

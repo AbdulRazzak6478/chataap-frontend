@@ -9,19 +9,34 @@ import { IoSend } from "react-icons/io5";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import socketIO from "socket.io-client";
+import axios from "axios";
 let socket;
 let ENDPOINT = "http://localhost:3005/";
-const PersonalChat = () => {
+const GroupChat = () => {
   const { userid, groupid } = useParams();
   console.log("data", userid, groupid);
   const [chatData, setChatData] = useState([]);
-  let chatFlag;
-
+  const [idUser, setIdUser] = useState([]);
+  let chatFlagedr;
+  const userDetails = async () =>{
+    const user = await axios.get(`http://localhost:3005/users/${userid}`);
+    console.log('user details : ',user.data);
+    console.log('user details id : ',user.data.data._id);
+    setIdUser(user.data);
+  }
+  useEffect(() => {
+    userDetails();
+  }, [ ]) 
+  
   function onSendMessageData() {
     let sendBtn = document.querySelector("#typed-msg").value;
     console.log("typed message : ", sendBtn);
+    if(sendBtn.length == 0 )
+    {
+      return;
+    }
 
-    socket.emit("user-message", { userid, groupid, message: sendBtn });
+    socket.emit("user-message", { name:idUser.data.name , userid , groupid, message: sendBtn });
     document.querySelector("#typed-msg").value = "";
     console.log("messages : ", chatData);
   }
@@ -33,8 +48,8 @@ const PersonalChat = () => {
     });
     socket.emit("joined", { groupid });
 
-    socket.on("userJoined ", (data) => {
-      console.log(data.message);
+    socket.on("userJoined", (data) => {
+      console.log('user joined',data);
     });
 
     socket.on("welcome", (data) => {
@@ -86,7 +101,7 @@ const PersonalChat = () => {
                   return (
                     <div className="other" key={index}>
                       <div className="wrapper otherwrapper">
-                        <div className="other-name">{chat.userid}</div>
+                        <div className="other-name">{chat.name}</div>
                         <div className="message">
                           <span>{chat.message}</span>
                           <span className="timestamp ">11:50PM</span>
@@ -109,4 +124,4 @@ const PersonalChat = () => {
   );
 };
 
-export default PersonalChat;
+export default GroupChat ;

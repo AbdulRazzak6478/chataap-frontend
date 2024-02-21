@@ -73,14 +73,14 @@
     padding: 5px;
     border-radius:5px;
     margin-left:5px;
-    max-width: 250px;
+    /* max-width: 250px; */
     margin-top: 0.5rem;
 }
-.otherwrapper{
-    /* Hex: #00a98f */
+/* .otherwrapper{
+
     max-width: 250px;
-}
-/* https://www.designpieces.com/palette/whatsapp-color-palette-hex-and-rgb/ */
+} */
+/* https://www.designpieces.com/palette/whatsapp-color-palette-hex-and-rgb/  /* Hex: #00a98f */*/
 .wrapper .other-name,.wrapper .my-name{
     font-size: 10px;
     padding: 0 5px;

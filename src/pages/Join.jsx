@@ -3,7 +3,7 @@ import React from 'react'
 import { Link, Navigate } from 'react-router-dom'
 
 const Join = () => {
-    let chatUserId = JSON.parse(localStorage.getItem("chatAppUserId"));
+    let chatUserId = localStorage.getItem("chatAppUserId");
     console.log('chat user id is : ',chatUserId);
     let token = Cookies.get("jwt_token"); 
     let isTokenPresent = 'token' ;

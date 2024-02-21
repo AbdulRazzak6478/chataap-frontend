@@ -19,7 +19,7 @@ const Home = () => {
     users: [],
   })
   const [fetchUsers, setFetchUsers] = useState([]);
-
+  const [currentUser, setCurrentUser] = useState({})
   const [submitClick,setSubmitClick]=useState(false);
   const [addUser,setAddUser] = useState('');
   const [isModel,setIsModel] = useState(false);
@@ -29,7 +29,9 @@ const Home = () => {
   const [isUsers, setIsUsers] = useState([])
   const [isLoading, setIsLoading] = useState(false);
   const [selectedUser, setSelectedUser] = useState('');
-  const [options, setOptions] = useState(false)
+  const [options, setOptions] = useState(false);
+  const [userGroups, setUserGroups] = useState([]);
+  const [userChats, setUserChats] = useState([]);
   const { id }= useParams();
 
 
@@ -41,18 +43,45 @@ const Home = () => {
       },
     };
     const user = await axios(`http://localhost:3005/users/${id}`);
-    console.log(' user : ',user.data.data);
+    console.log(' user : ',user.data?.data);
 
     const chatUsers = await axios("http://localhost:3005/users");
-    console.log(' chat users : ',chatUsers.data.data);
+    setFetchUsers(chatUsers.data.data);
 
-    setFetchUsers(chatUsers.data.data)
+    console.log(' user groups array  : ',user.data?.data.groups);
+    // const group = await axios.get(`http://localhost:3005/groups/${user.data?.data.groups}`);
+    //   console.log(' fetch groups : ',group.data.data);
+    const userGroups = [];
+    const groupsArr = await user.data?.data.groups.map(async(groupId,index)=>{
+      // const userGroups = user.data?.data.groups;
+      // setCurrentUser(user.data?.data);
+      const group = await axios.get(`http://localhost:3005/groups/${groupId}`);
+      console.log(' fetch groups : ',group.data.data);
+      // setUserGroups((prevState)=>[...prevState,group.data.data]);
+      return group;
+    });
+    console.log('data : ',groupsArr);
+    // const friend = await axios.get(`http://localhost:3005/chats/`);
+    //   console.log(' fetch user friends : ',friend.data.data);
+    // const userFriendsArr = await user.data?.data?.friends.map(async(friendId,index)=>{
+    //   const friend = await axios.get(`http://localhost:3005/chats/`);
+    //   console.log(' fetch user friends : ',friend.data.data);
+    //   setUserChats((prevState)=>[...prevState,friend.data.data]);
+    //   return friend;
+    // });
+    return groupsArr;
+
+    // console.log('user all groups details : ',groupsArr);
+    // setUserGroups(groups.data.data);
+
   }
 
   // fetching users when home page loaded
   useEffect(function(){
-    // gettingUsers();
-  }, []) 
+    const groupData = gettingUsers();
+    // setUserGroups(groupData);
+    console.log('groups data:',userGroups);
+  }, []) ;
  
 
   let token = Cookies.get("jwt_token");
@@ -115,6 +144,7 @@ const Home = () => {
       return;
     }
     let usersIds = '';
+    usersIds+=JSON.parse(localStorage.getItem("chatAppUserId"))+',';
     // getting ids of selected users to add in group users
     fetchUsers.forEach((user)=>{
       isUsers.forEach((name,index)=>{
@@ -156,16 +186,16 @@ const Home = () => {
       setIsUsers([...isUsers.filter(ele=>event.target.id!=ele)])
     }
   }
+
+  const getUserGroupsAndPersonalChats = async() =>{
+    const groups = await axios.get('http://localhost:3005/groups');
+    console.log('user data : ',currentUser);
+    console.log(' user groups : ',groups);
+  }
   
-  useEffect(() => {
-      // (async()=>{
-      //   const user = await 
-      // })()
-  
-    return () => {
-      
-    }
-  }, [])
+  // useEffect(async() => {
+    // await getUserGroupsAndPersonalChats();
+  // }, [])
   
 
   return (
@@ -206,7 +236,7 @@ const Home = () => {
                   </div>
                   <div className="list">
                     <ul>
-                      {fetchUsers.map((user,index)=><li key={index}> <input type="checkbox"  name="check"  className="click" onClick={onSubmitFormData}   id={`${user.name}`}/> <span>{user.name}</span></li>
+                      {fetchUsers.map((user,index)=><li key={index}> <input type="checkbox"   name="check"  className="click" onClick={onSubmitFormData}   id={`${user.name}`}/> <span>{user.name}</span></li>
                       )}
                     </ul> 
                   </div>
@@ -236,108 +266,34 @@ const Home = () => {
                 
             <div className="list-container">
               <div className="group-list">
-                <div className="group-list-item">
+              {
+                userGroups?.length == 0 && <h1>No Groups user have, create a new one !</h1>  
+              }
+              {
+                userGroups?.length > 0 && (userGroups.map((group,index)=>{
+                  return <div className="group-list-item" key={group.id}>
                   <div className="group-name">
                     <MdGroupAdd />
-                    <span>Chaddy Buddies</span>
+                    <span>{group.name}</span>
                   </div>
                   <div className="group-options">
-                    <SlOptionsVertical onClick={(e)=>setOptions(false)} />
-                    { 
-                      options && <div className="group-options-list">
-                        <div>Delete</div>
-                        <div>Edit</div>
-                        <div onClick={(e)=>setOptions(false)}>Cancel</div>
-                      </div>
-                    }
+                    <SlOptionsVertical />
                   </div>
                 </div>
-                <div className="group-list-item">
-                  <div className="group-name">
-                    <MdGroupAdd />
-                    <span>CSE Buddies</span>
-                  </div>
-                  <div className="group-options">
-                  <SlOptionsVertical onClick={(e)=>setOptions(false)} />
-                    { 
-                      options && <div className="group-options-list">
-                        <div>Delete</div>
-                        <div>Edit</div>
-                        <div onClick={(e)=>setOptions(false)}>Cancel</div>
-                      </div>
-                    }
-                  </div>
-                </div>
-                <div className="group-list-item">
-                  <div className="group-name">
-                    <MdGroupAdd />
-                    <span>IT Software hiring</span>
-                  </div>
-                  <div className="group-options">
-                  <SlOptionsVertical onClick={(e)=>setOptions(false)} />
-                    { 
-                      options && <div className="group-options-list">
-                        <div>Delete</div>
-                        <div>Edit</div>
-                        <div onClick={(e)=>setOptions(false)}>Cancel</div>
-                      </div>
-                    }
-                  </div>
-                </div>
-                <div className="group-list-item">
-                  <div className="group-name">
-                    <MdGroupAdd />
-                    <span>Web Development</span>
-                  </div>
-                  <div className="group-options">
-                  <SlOptionsVertical onClick={(e)=>setOptions(false)} />
-                    { 
-                      options && <div className="group-options-list">
-                        <div>Delete</div>
-                        <div>Edit</div>
-                        <div onClick={(e)=>setOptions(false)}>Cancel</div>
-                      </div>
-                    }
-                  </div>
-                </div>
-                <div className="group-list-item">
-                  <div className="group-name">
-                    <MdGroupAdd />
-                    <span>Backend Development</span>
-                  </div>
-                  <div className="group-options">
-                  <SlOptionsVertical onClick={(e)=>setOptions(false)} />
-                    { 
-                      options && <div className="group-options-list">
-                        <div>Delete</div>
-                        <div>Edit</div>
-                        <div onClick={(e)=>setOptions(false)}>Cancel</div>
-                      </div>
-                    }
-                  </div>
-                </div>
-                <div className="group-list-item">
-                  <div className="group-name">
-                    <MdGroupAdd />
-                    <span>Friends forever</span>
-                  </div>
-                  <div className="group-options">
-                  <SlOptionsVertical onClick={(e)=>setOptions(false)} />
-                    { 
-                      options && <div className="group-options-list">
-                        <div>Delete</div>
-                        <div>Edit</div>
-                        <div onClick={(e)=>setOptions(false)}>Cancel</div>
-                      </div>
-                    }
-                  </div>
-                </div>
+                }))
+              }
+                
               </div>
 
               {/* user list  */}
 
               <div className="user-list">
-                <div className="user-list-item">
+              {
+                userChats?.length == 0 && <h1> No friends chats available , create a new one .</h1>
+              }
+              {
+                userChats?.length > 0 && userChats.map((friend,index)=>{
+                  return  <div className="user-list-item" key={index}>
                   <div className="user-name">
                     <MdPersonAddAlt1 />
                     <span>Mohammed</span>
@@ -353,6 +309,9 @@ const Home = () => {
                     }
                   </div>
                 </div>
+                })
+              }
+               
                 <div className="user-list-item">
                   <div className="user-name">
                     <MdPersonAddAlt1 />
