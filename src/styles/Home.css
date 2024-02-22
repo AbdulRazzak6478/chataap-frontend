@@ -127,7 +127,10 @@ input{
     justify-content: center;
     align-items: center;
 }
-
+.group-list a,.user-list a{
+    text-decoration: none;
+    color: black;
+}
 .group-list , .user-list{
     width: 100%;
     border:2px solid black;

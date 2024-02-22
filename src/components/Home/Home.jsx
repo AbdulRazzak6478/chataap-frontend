@@ -37,30 +37,46 @@ const Home = () => {
 
   async function gettingUsers()
   {
+    const user = await axios(`http://localhost:3005/users/${id}`);
+    console.log(' user : ',user.data?.data);
+    setCurrentUser(user.data?.data);
+
+    const chatUsers = await axios("http://localhost:3005/users");
+    setFetchUsers(chatUsers.data.data);
+
+    // console.log(' user groups array  : ',user.data?.data.groups);
+    // const groupsIds = JSON.stringify(user.data?.data.groups);
+    // console.log(' user groups array stringify  : ',groupsIds, typeof groupsIds);
+    // console.log(' user groups array parse  : ',JSON.parse(groupsIds));
+
     const customConfig = {
       headers: {
           "Content-Type": "application/json",
       },
     };
-    const user = await axios(`http://localhost:3005/users/${id}`);
-    console.log(' user : ',user.data?.data);
+    let arr = ['65d5ef15ee57b64ad241e339','65d5efd4ee57b64ad241e34c'];
+    const createGroupPayload = {
 
-    const chatUsers = await axios("http://localhost:3005/users");
-    setFetchUsers(chatUsers.data.data);
+      // admin : JSON.parse(localStorage.getItem("chatAppUserId")), 
+      ids : user.data?.data.groups,
+    };
+    // console.log('getting group payload is : ',createGroupPayload);
+    const fetchGroups = await axios.post('http://localhost:3005/groups/ids',createGroupPayload,customConfig);
+    console.log('user groups details: ',fetchGroups);
+    setUserGroups(fetchGroups?.data?.data);
 
-    console.log(' user groups array  : ',user.data?.data.groups);
-    // const group = await axios.get(`http://localhost:3005/groups/${user.data?.data.groups}`);
+
+    // const groupsArr = await user.data?.data.groups.map(async(groupId,index)=>{
+    //   // const userGroups = user.data?.data.groups;
+    //   // setCurrentUser(user.data?.data);
+    //   const group = await axios.get(`http://localhost:3005/groups/${groupId}`);
     //   console.log(' fetch groups : ',group.data.data);
-    const userGroups = [];
-    const groupsArr = await user.data?.data.groups.map(async(groupId,index)=>{
-      // const userGroups = user.data?.data.groups;
-      // setCurrentUser(user.data?.data);
-      const group = await axios.get(`http://localhost:3005/groups/${groupId}`);
-      console.log(' fetch groups : ',group.data.data);
-      // setUserGroups((prevState)=>[...prevState,group.data.data]);
-      return group;
-    });
-    console.log('data : ',groupsArr);
+    //   setUserGroups((prevState)=>[...prevState,group.data.data]);
+    //   arr.push([...arr,group]);
+    //   return group;
+    // });
+    // console.log('arr :',arr);
+    // console.log('data : ',groupsArr);
     // const friend = await axios.get(`http://localhost:3005/chats/`);
     //   console.log(' fetch user friends : ',friend.data.data);
     // const userFriendsArr = await user.data?.data?.friends.map(async(friendId,index)=>{
@@ -69,7 +85,6 @@ const Home = () => {
     //   setUserChats((prevState)=>[...prevState,friend.data.data]);
     //   return friend;
     // });
-    return groupsArr;
 
     // console.log('user all groups details : ',groupsArr);
     // setUserGroups(groups.data.data);
@@ -79,7 +94,6 @@ const Home = () => {
   // fetching users when home page loaded
   useEffect(function(){
     const groupData = gettingUsers();
-    // setUserGroups(groupData);
     console.log('groups data:',userGroups);
   }, []) ;
  
@@ -121,8 +135,10 @@ const Home = () => {
         usersIds+=user._id;
       }
     });
+    const names = [currentUser.name,selectedUser];
     const createUserPayload = { 
       users : usersIds,
+      userNames : names,
     };
     console.log('create group payload is : ',createUserPayload);
      const createdUser = await axios.post('http://localhost:3005/chats',createUserPayload,customConfig);
@@ -271,7 +287,7 @@ const Home = () => {
               }
               {
                 userGroups?.length > 0 && (userGroups.map((group,index)=>{
-                  return <div className="group-list-item" key={group.id}>
+                  return <Link to={`/${id}/groups/${group._id}`}> <div className="group-list-item" key={group.id}>
                   <div className="group-name">
                     <MdGroupAdd />
                     <span>{group.name}</span>
@@ -280,6 +296,7 @@ const Home = () => {
                     <SlOptionsVertical />
                   </div>
                 </div>
+                </Link>
                 }))
               }
                 
