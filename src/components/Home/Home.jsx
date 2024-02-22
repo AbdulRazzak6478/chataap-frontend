@@ -39,6 +39,8 @@ const Home = () => {
   {
     const user = await axios(`http://localhost:3005/users/${id}`);
     console.log(' user : ',user.data?.data);
+    console.log(' user groups array : ',user.data?.data.groups);
+    console.log(' user friends array : ',user.data?.data.friends);
     setCurrentUser(user.data?.data);
 
     const chatUsers = await axios("http://localhost:3005/users");
@@ -287,7 +289,7 @@ const Home = () => {
               }
               {
                 userGroups?.length > 0 && (userGroups.map((group,index)=>{
-                  return <Link to={`/${id}/groups/${group._id}`}> <div className="group-list-item" key={group.id}>
+                  return <Link to={`/${id}/groups/${group._id}`} key={group._id}> <div className="group-list-item" key={group.id}>
                   <div className="group-name">
                     <MdGroupAdd />
                     <span>{group.name}</span>
