@@ -67,6 +67,13 @@ const Home = () => {
     console.log('user groups details: ',fetchGroups);
     setUserGroups(fetchGroups?.data?.data);
 
+    const friendsIds = {
+      // ids :['65da014beb2ac3579d724d4e','65da0150eb2ac3579d724d54','65da0154eb2ac3579d724d5a'],
+      ids :user.data?.data.friends,
+    }
+    const fetchFriends = await axios.post('http://localhost:3005/chats/friends',friendsIds,customConfig);
+    console.log(' user fetch friends details : ',fetchFriends);
+    setUserChats(fetchFriends.data.data);
 
     // const groupsArr = await user.data?.data.groups.map(async(groupId,index)=>{
     //   // const userGroups = user.data?.data.groups;
@@ -96,7 +103,6 @@ const Home = () => {
   // fetching users when home page loaded
   useEffect(function(){
     const groupData = gettingUsers();
-    console.log('groups data:',userGroups);
   }, []) ;
  
 
@@ -143,7 +149,8 @@ const Home = () => {
       userNames : names,
     };
     console.log('create group payload is : ',createUserPayload);
-     const createdUser = await axios.post('http://localhost:3005/chats',createUserPayload,customConfig);
+    const createdUser = await axios.post('http://localhost:3005/chats',createUserPayload,customConfig);
+    setUserChats((prevState)=>[...prevState,createdUser?.data.data]);
     console.log('group created : ',createdUser);
     setIsModel(false);
     toast.success('User created successfully !.')
@@ -191,7 +198,8 @@ const Home = () => {
     setName('');
     setIsUsers([]);
     setIsModel(false);
-    toast.success('Group created successfully !.')
+    toast.success('Group created successfully !.');
+    setUserGroups((prevState)=>[...prevState,createdGroup?.data.data]);
   }
 
   function onSubmitFormData(event)
@@ -312,10 +320,10 @@ const Home = () => {
               }
               {
                 userChats?.length > 0 && userChats.map((friend,index)=>{
-                  return  <div className="user-list-item" key={index}>
+                  return <Link to={`/${id}/chats/${friend._id}`} key={friend._id}> <div className="user-list-item" key={index}>
                   <div className="user-name">
                     <MdPersonAddAlt1 />
-                    <span>Mohammed</span>
+                    <span>{currentUser.name == friend.userNames[0]?friend.userNames[1]:friend.userNames[0]}</span>
                   </div>
                   <div className="user-options">
                   <SlOptionsVertical onClick={(e)=>setOptions(false)} />
@@ -328,10 +336,11 @@ const Home = () => {
                     }
                   </div>
                 </div>
+                </Link> 
                 })
               }
                
-                <div className="user-list-item">
+                {/* <div className="user-list-item">
                   <div className="user-name">
                     <MdPersonAddAlt1 />
                     <span>Abdul</span>
@@ -408,7 +417,7 @@ const Home = () => {
                       </div>
                     }
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
 
