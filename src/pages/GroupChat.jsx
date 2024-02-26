@@ -26,14 +26,20 @@ const GroupChat = () => {
     setIdUser(user.data);
   } 
   const userGrpDetails = async () =>{
-    const user = await axios.get(`http://localhost:3005/groups/${groupid}`);
-    console.log('user group details : ',user.data);
-    console.log('user details id : ',user.data.data._id);
-    setUserGroup(user?.data?.data);
+    const group = await axios.get(`http://localhost:3005/groups/${groupid}`);
+    console.log('user group details : ',group.data);
+    console.log('user details id : ',group.data.data._id);
+    setUserGroup(group?.data?.data);
+  } 
+  const userGroupChatMessages = async () =>{
+    const user = await axios.get(`http://localhost:3005/groups/${groupid}/chats`);
+    console.log('user group messages details : ',user);
+    setChatData([...user?.data?.data]);
   } 
   useEffect(() => {
     userDetails();
     userGrpDetails();
+    userGroupChatMessages();
   }, [ ]) 
   
   function onSendMessageData() {
@@ -48,6 +54,7 @@ const GroupChat = () => {
     document.querySelector("#typed-msg").value = "";
     console.log("messages : ", chatData);
   }
+
 
   useEffect(() => {
     socket = socketIO(ENDPOINT, { transports: ["websocket"] });
