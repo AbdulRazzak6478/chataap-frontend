@@ -17,15 +17,23 @@ const GroupChat = () => {
   console.log("data", userid, groupid);
   const [chatData, setChatData] = useState([]);
   const [idUser, setIdUser] = useState([]);
+  const [userGroup, setUserGroup] = useState([]);
   let chatFlagedr;
   const userDetails = async () =>{
     const user = await axios.get(`http://localhost:3005/users/${userid}`);
     console.log('user details : ',user.data);
     console.log('user details id : ',user.data.data._id);
     setIdUser(user.data);
-  }
+  } 
+  const userGrpDetails = async () =>{
+    const user = await axios.get(`http://localhost:3005/groups/${groupid}`);
+    console.log('user group details : ',user.data);
+    console.log('user details id : ',user.data.data._id);
+    setUserGroup(user?.data?.data);
+  } 
   useEffect(() => {
     userDetails();
+    userGrpDetails();
   }, [ ]) 
   
   function onSendMessageData() {
@@ -36,7 +44,7 @@ const GroupChat = () => {
       return;
     }
 
-    socket.emit("user-message", { name:idUser.data.name , userid , groupid, message: sendBtn });
+    socket.emit("user-message", { userName:idUser.data.name , userId:userid , chatId: groupid, message: sendBtn, isGroup : true });
     document.querySelector("#typed-msg").value = "";
     console.log("messages : ", chatData);
   }
@@ -73,7 +81,7 @@ const GroupChat = () => {
           <div className="group-header">
             <div className="grp-head">
               <MdGroupAdd />
-              <span>Qureshi</span>
+              <span>{userGroup.name}</span>
             </div>
             <div className="grp-profile">
               <FaCircleArrowRight />
@@ -85,7 +93,7 @@ const GroupChat = () => {
             }
             {chatData.length != 0 &&
               chatData.map((chat, index) => {
-                if (chat.userid == userid) {
+                if (chat.userId == userid) {
                   return (
                     <div className="my" key={index}>
                       <div className="wrapper mywrapper">
@@ -101,7 +109,7 @@ const GroupChat = () => {
                   return (
                     <div className="other" key={index}>
                       <div className="wrapper otherwrapper">
-                        <div className="other-name">{chat.name}</div>
+                        <div className="other-name">{chat.userName}</div>
                         <div className="message">
                           <span>{chat.message}</span>
                           <span className="timestamp ">11:50PM</span>
