@@ -107,10 +107,10 @@ const GroupChat = () => {
                   return (
                     <div className="my" key={index}>
                       <div className="wrapper mywrapper">
-                        <div className="my-name">You</div><hr className="line" />
+                        <div className="my-name">You</div>
                         <div className="message">
                           <span>{chat.message}</span>
-                          <span className="timestamp">{`${date.getHours()} : ${date.getMinutes()} ${am_pm}`}</span>
+                          <span className="timestamp">{`${date.getHours() >12 ? date.getHours() -12 :date.getHours()} : ${date.getMinutes()} ${am_pm}`}</span>
                         </div>
                       </div>
                     </div>
@@ -119,10 +119,10 @@ const GroupChat = () => {
                   return (
                     <div className="other" key={index}>
                       <div className="wrapper otherwrapper">
-                        <div className="other-name">{chat.userName}</div><hr className="line" />
+                        <div className="other-name">{chat.userName}</div>
                         <div className="message">
                           <span>{chat.message}</span>
-                          <span className="timestamp">{`${date.getHours()} : ${date.getMinutes()} ${am_pm}`}</span>
+                          <span className="timestamp">{`${date.getHours() >12 ? date.getHours() -12 :date.getHours()} : ${date.getMinutes()} ${am_pm}`}</span>
                         </div>
                       </div>
                     </div>
