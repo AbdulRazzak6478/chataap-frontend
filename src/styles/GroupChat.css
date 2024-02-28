@@ -98,6 +98,7 @@
     background-color:  #25d366;
     background-color:  #4fcb7c;
     margin-right: 5px;
+    /* border-bottom-left-radius: 50px; */
 } 
 .wrapper .message {
     display: flex;
@@ -106,7 +107,7 @@
 .wrapper .message .timestamp{
     /* font-size: 8px; */
     font-size: 0.7rem;
-    text-align: end;
+    text-align: start;
 }
 .typing-box{
     max-width: 700px;
@@ -148,4 +149,15 @@
     padding: 0;
     margin: 0;
     margin-bottom: 5px;
+}
+
+.mywrapper{
+    border-bottom-right-radius: 2.5rem ;
+}
+.otherwrapper{
+    border-bottom-left-radius: 2.5rem;
+}
+.time{
+    text-align: end;
+    font-size: 0.7rem;
 }

@@ -122,7 +122,7 @@ const GroupChat = () => {
                         <div className="other-name">{chat.userName}</div>
                         <div className="message">
                           <span>{chat.message}</span>
-                          <span className="timestamp">{`${date.getHours() >12 ? date.getHours() -12 :date.getHours()} : ${date.getMinutes()} ${am_pm}`}</span>
+                          <span className="time">{`${date.getHours() >12 ? date.getHours() -12 :date.getHours()} : ${date.getMinutes()} ${am_pm}`}</span>
                         </div>
                       </div>
                     </div>
