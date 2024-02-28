@@ -100,14 +100,17 @@ const GroupChat = () => {
             }
             {chatData.length != 0 &&
               chatData.map((chat, index) => {
+                const date = new Date(chat.createdAt);
+                const am_pm = date.getHours() >= 12 ? 'PM' : 'AM';
+                console.log('date : ',date)
                 if (chat.userId == userid) {
                   return (
                     <div className="my" key={index}>
                       <div className="wrapper mywrapper">
-                        <div className="my-name">You</div>
+                        <div className="my-name">You</div><hr className="line" />
                         <div className="message">
                           <span>{chat.message}</span>
-                          <span className="timestamp">11:50PM</span>
+                          <span className="timestamp">{`${date.getHours()} : ${date.getMinutes()} ${am_pm}`}</span>
                         </div>
                       </div>
                     </div>
@@ -116,10 +119,10 @@ const GroupChat = () => {
                   return (
                     <div className="other" key={index}>
                       <div className="wrapper otherwrapper">
-                        <div className="other-name">{chat.userName}</div>
+                        <div className="other-name">{chat.userName}</div><hr className="line" />
                         <div className="message">
                           <span>{chat.message}</span>
-                          <span className="timestamp ">11:50PM</span>
+                          <span className="timestamp">{`${date.getHours()} : ${date.getMinutes()} ${am_pm}`}</span>
                         </div>
                       </div>
                     </div>
