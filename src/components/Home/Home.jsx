@@ -34,69 +34,45 @@ const Home = () => {
   const [userChats, setUserChats] = useState([]);
   const { id }= useParams();
 
+  useEffect(() => {
+    try {
+      (async()=>{
+        const chatUsers = await axios("http://localhost:3005/users");
+        setFetchUsers(chatUsers.data.data);
+      })()
+    } catch (error) {
+      console.log('error while fetching users');
+    }
+  }, [])
+  
 
   async function gettingUsers()
   {
     const user = await axios(`http://localhost:3005/users/${id}`);
-    console.log(' user : ',user.data?.data);
-    console.log(' user groups array : ',user.data?.data.groups);
-    console.log(' user friends array : ',user.data?.data.friends);
     setCurrentUser(user.data?.data);
 
-    const chatUsers = await axios("http://localhost:3005/users");
-    setFetchUsers(chatUsers.data.data);
-
-    // console.log(' user groups array  : ',user.data?.data.groups);
-    // const groupsIds = JSON.stringify(user.data?.data.groups);
-    // console.log(' user groups array stringify  : ',groupsIds, typeof groupsIds);
-    // console.log(' user groups array parse  : ',JSON.parse(groupsIds));
+    // const chatUsers = await axios("http://localhost:3005/users");
+    // setFetchUsers(chatUsers.data.data);
 
     const customConfig = {
       headers: {
           "Content-Type": "application/json",
       },
     };
-    let arr = ['65d5ef15ee57b64ad241e339','65d5efd4ee57b64ad241e34c'];
-    const createGroupPayload = {
 
-      // admin : JSON.parse(localStorage.getItem("chatAppUserId")), 
+    const createGroupPayload = {
       ids : user.data?.data.groups,
     };
-    // console.log('getting group payload is : ',createGroupPayload);
     const fetchGroups = await axios.post('http://localhost:3005/groups/ids',createGroupPayload,customConfig);
     console.log('user groups details: ',fetchGroups);
     setUserGroups(fetchGroups?.data?.data);
 
     const friendsIds = {
-      // ids :['65da014beb2ac3579d724d4e','65da0150eb2ac3579d724d54','65da0154eb2ac3579d724d5a'],
       ids :user.data?.data.friends,
     }
     const fetchFriends = await axios.post('http://localhost:3005/chats/friends',friendsIds,customConfig);
     console.log(' user fetch friends details : ',fetchFriends);
     setUserChats(fetchFriends.data.data);
-
-    // const groupsArr = await user.data?.data.groups.map(async(groupId,index)=>{
-    //   // const userGroups = user.data?.data.groups;
-    //   // setCurrentUser(user.data?.data);
-    //   const group = await axios.get(`http://localhost:3005/groups/${groupId}`);
-    //   console.log(' fetch groups : ',group.data.data);
-    //   setUserGroups((prevState)=>[...prevState,group.data.data]);
-    //   arr.push([...arr,group]);
-    //   return group;
-    // });
-    // console.log('arr :',arr);
-    // console.log('data : ',groupsArr);
-    // const friend = await axios.get(`http://localhost:3005/chats/`);
-    //   console.log(' fetch user friends : ',friend.data.data);
-    // const userFriendsArr = await user.data?.data?.friends.map(async(friendId,index)=>{
-    //   const friend = await axios.get(`http://localhost:3005/chats/`);
-    //   console.log(' fetch user friends : ',friend.data.data);
-    //   setUserChats((prevState)=>[...prevState,friend.data.data]);
-    //   return friend;
-    // });
-
-    // console.log('user all groups details : ',groupsArr);
-    // setUserGroups(groups.data.data);
 
   }
 
@@ -107,15 +83,6 @@ const Home = () => {
  
 
   let token = Cookies.get("jwt_token");
-  // const obj ={
-  //   _id:'1234567890',
-  //   '_id':'0987654321',
-  //   id:'asdfghjkl',
-  // }
-  // console.log("1",obj.id);
-  // console.log("2",obj._id);
-  // console.log("3",obj['_id']);
-  // let arr = [];
 
   function onCancelModel()
   {

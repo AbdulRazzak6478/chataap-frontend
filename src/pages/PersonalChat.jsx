@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import socketIO from "socket.io-client";
 import axios from "axios";
+import ReactScrollToBottom from 'react-scroll-to-bottom';
 let socket;
 let ENDPOINT = "http://localhost:3005/";
 const GroupChat = () => {
@@ -102,7 +103,7 @@ const GroupChat = () => {
               <FaCircleArrowRight />
             </div>
           </div>
-          <div className="chats-container">
+          <ReactScrollToBottom className="chats-container">
             {
                 chatData.length == 0 && <h1>No Messages in This Chat.</h1>
             }
@@ -136,7 +137,7 @@ const GroupChat = () => {
                   );
                 }
               })}
-          </div>
+          </ReactScrollToBottom>
         </div>
         <div className="typing-box">
           <input type="text" id="typed-msg" placeholder="Start Typing ..." />
