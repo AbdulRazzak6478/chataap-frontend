@@ -10,6 +10,7 @@ import Join from './pages/Join'
 import GroupChat from './pages/GroupChat'
 import PersonalChat from './pages/PersonalChat'
 import axios from 'axios'
+import FixingType from './pages/FixingType'
 // // import { io } from 'socket.io-client';
 // // import socketIO from 'socket.io-client';
 
@@ -41,6 +42,7 @@ function App() {
         {/* <Header /> */}
         <Routes>
             <Route path="/" element={<Join />} />
+            <Route path="/fixingType" element={<FixingType />} />
             <Route path="/:id" element={<Home />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />

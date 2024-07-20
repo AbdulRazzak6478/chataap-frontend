@@ -17,7 +17,7 @@ const Header = () => {
         <header className='header '>
           <h3>
             <a href="#home" className="logo">
-            Abdul Razzak
+            ChatMeet
             </a>
           </h3>
           {/* <Search /> */}
